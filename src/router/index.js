@@ -38,6 +38,16 @@ const routes = [
       return isNaN(id) ? { id: 1 } : { id }
     }
   },
+
+  {
+    path: '/prescriptions/:id/edit',
+    name: 'prescriptions-edit',
+    component: () => import( '@/views/prescriptions/EditView.vue'),
+    props: ( route ) => {
+      const id = Number(route.params.id)
+      return isNaN(id) ? { id: 1 } : { id }
+    }
+  },
  
   { 
     path: '/:pathMatch(.*)*', 

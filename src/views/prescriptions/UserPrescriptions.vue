@@ -15,7 +15,12 @@
             <tr v-for="prescription in prescriptions" :key="prescription.id">
                 <td>{{ prescription.id }}</td>
                 <td>{{ prescription.title }}</td>
-                <td><a href="#">Editar</a></td>
+                <td>
+                    <router-link
+                      :to="{ name: 'prescriptions-edit', params: { id: prescription.id } }">
+                        Editar
+                    </router-link>
+                </td>
             </tr>
         </tbody>
         </table>
