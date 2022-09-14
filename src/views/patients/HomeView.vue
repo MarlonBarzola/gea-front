@@ -25,9 +25,13 @@
           <th scope="row">{{ user.id }}</th>
           <td>{{ user.name }}</td>
           <td>{{ user.prescriptions.length }}</td>
-          <td>Añadir receta</td>
           <td>
-            <a href="#" @click.prevent="deleteUser(user.id)"> Delete </a>
+            <router-link :to="{ name: 'prescriptions-create', params: { id: user.id } }">
+              Añadir prescripción
+            </router-link>
+          </td>
+          <td>
+            <a class="delete" href="#" @click.prevent="deleteUser(user.id)"> Delete </a>
           </td>
         </tr>
       </tbody>
@@ -110,4 +114,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+  .delete {
+    color: red;
+  }
+</style>

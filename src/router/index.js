@@ -15,8 +15,28 @@ const routes = [
         path: 'create',
         name: 'patients-create',
         component: () => import('@/views/patients/CreateView'),
-      }
+      },
     ]
+  },
+
+  {
+    path: '/user/:id/prescription',
+    name: 'prescriptions-create',
+    component: () => import( '@/views/prescriptions/CreateView.vue'),
+    props: ( route ) => {
+      const id = Number(route.params.id)
+      return isNaN(id) ? { id: 1 } : { id }
+    }
+  },
+
+  {
+    path: '/prescriptions/:id',
+    name: 'prescriptions-index',
+    component: () => import( '@/views/prescriptions/UserPrescriptions.vue'),
+    props: ( route ) => {
+      const id = Number(route.params.id)
+      return isNaN(id) ? { id: 1 } : { id }
+    }
   },
  
   { 
