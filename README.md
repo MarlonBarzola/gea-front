@@ -1,3 +1,6 @@
+# Importante
+Cambiar en el main.js la url del backend
+
 # hospital
 
 ## Project setup
