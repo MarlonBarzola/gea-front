@@ -7,7 +7,7 @@
       v-model="search"
       id="name"
       type="text"
-      placeholder="Buscar por nombre"
+      placeholder="Buscar por nombre o apellido"
       autocomplete="off"
     />
 
@@ -16,22 +16,37 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nombre</th>
-          <th scope="col">Recetas</th>
-          <th scope="col" colspan="2">Actions</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Cédula</th>
+          <th scope="col">Historial</th>
+          <th scope="col" colspan="2">Historia clínica</th>
+          <th scope="col" colspan="2">Paciente</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="user in users" :key="'user-' + user.id">
           <th scope="row">{{ user.id }}</th>
           <td>{{ user.name }}</td>
-          <td>{{ user.prescriptions.length }}</td>
+          <td>{{ user.surname }}</td>
+          <td>{{ user.dni }}</td>
+          <td>{{ user.history_count }}</td>
           <td>
-            <router-link :to="{ name: 'prescriptions-create', params: { id: user.id } }">
-              Añadir prescripción
+            <router-link :to="{ name: 'patients-history', params: {id: user.id} }">
+              Ver
             </router-link>
           </td>
           <td>
-            <a class="delete" href="#" @click.prevent="deleteUser(user.id)"> Delete </a>
+            <router-link :to="{ name: 'prescriptions-create', params: { id: user.id } }">
+              Añadir
+            </router-link>
+          </td>
+          <td>
+            <router-link :to="{ name: 'patients-edit', params: { id: user.id } }">
+              Editar
+            </router-link>
+          </td>
+          <td>
+            <a class="delete" href="#" @click.prevent="deleteUser(user.id)"> Eliminar </a>
           </td>
         </tr>
       </tbody>
@@ -82,7 +97,7 @@ export default {
   methods: {
     getUsers() {
       this.axios
-        .get("/users", {
+        .get("/patients", {
             params: {
                 page: this.page,
                 search: this.search
@@ -100,7 +115,7 @@ export default {
 
     deleteUser(id) {
       this.axios
-        .delete(`/users/${id}`)
+        .delete(`/patients/${id}`)
         .then(() => {
           alert('Paciente eliminado correctamente')
           this.getUsers();

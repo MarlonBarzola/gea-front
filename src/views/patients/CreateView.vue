@@ -19,38 +19,62 @@
         </div>
 
         <div class="mb-2">
-          <label for="name">Email</label>
+          <label for="surname">Email</label>
+          <br />
+          <input
+            class="form-control"
+            v-model="patient.surname"
+            id="surname"
+            type="text"
+            placeholder="Apellido del paciente"
+          />
+        </div>
+
+        <div class="mb-2">
+          <label for="dni">Cédula</label>
+          <br />
+          <input
+            class="form-control"
+            v-model="patient.dni"
+            id="dni"
+            type="text"
+            placeholder="Cédula del usuario"
+          />
+        </div>
+
+        <div class="mb-2">
+          <label for="email">Correo electrónico</label>
           <br />
           <input
             class="form-control"
             v-model="patient.email"
-            id="name"
+            id="email"
+            type="email"
+            placeholder="Correo electrónico del paciente"
+          />
+        </div>
+
+        <div class="mb-2">
+          <label for="phone">Teléfono</label>
+          <br />
+          <input
+            class="form-control"
+            v-model="patient.phone"
+            id="phone"
             type="text"
-            placeholder="Correo del paciente"
+            placeholder="Teléfono del paciente"
           />
         </div>
 
         <div class="mb-2">
-          <label for="password">Contraseña</label>
+          <label for="birthday">Fecha de nacimiento</label>
           <br />
           <input
             class="form-control"
-            v-model="patient.password"
-            id="password"
-            type="password"
-            placeholder="Contraseña para el usuario"
-          />
-        </div>
-
-        <div class="mb-2">
-          <label for="password-repeat">Confirmar Contraseña</label>
-          <br />
-          <input
-            class="form-control"
-            v-model="patient.password_confirmation"
-            id="password-repeat"
-            type="password"
-            placeholder="Repetir contraseña"
+            v-model="patient.birthday"
+            id="birthday"
+            type="date"
+            placeholder="Fecha de nacimiento del paciente"
           />
         </div>
 
@@ -71,9 +95,11 @@ export default {
     return {
       patient: {
         name: "",
+        surname: "",
+        dni: "",
         email: "",
-        password: "",
-        password_confirmation: "",
+        phone: "",
+        birthday: ""
       },
       errors: [],
     };
@@ -82,7 +108,7 @@ export default {
   methods: {
     savePatient() {
       this.axios
-        .post("/users", this.patient)
+        .post("/patients", this.patient)
         .then(() => {
           this.patient = {
             name: "",
